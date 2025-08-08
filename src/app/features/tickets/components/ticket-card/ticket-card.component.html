@@ -1,0 +1,105 @@
+<div 
+	class="ticket-card shadow-sm hover:shadow-lg overflow-hidden"
+	[routerLink]="['/tickets', ticket().id]"
+>
+  
+	<div 
+		class="status-strip h-3 w-full"
+		[class.status-open]="ticket().status === TicketStatus.OPEN"
+		[class.status-in-progress]="ticket().status === TicketStatus.IN_PROGRESS"
+		[class.status-completed]="ticket().status === TicketStatus.COMPLETED"
+	></div>
+
+  <div class="p-6 relative">
+	<div class="ticket-id absolute top-4 right-4">
+		#{{ ticket().id }}
+	</div>
+
+	<div class="flex justify-between items-start mb-4 mr-16">
+		<h3 class="text-lg font-semibold line-clamp-2 flex-1">
+			{{ ticket().title }}
+		</h3>
+	</div>
+
+	<div class="flex justify-start mb-4">
+		<span 
+			class="status-badge px-3 py-1 text-xs font-medium whitespace-nowrap"
+			[ngClass]="{
+			  'bg-amber-100 text-amber-800': ticket().status === TicketStatus.OPEN,
+			  'bg-blue-100 text-blue-800': ticket().status === TicketStatus.IN_PROGRESS,
+			  'bg-emerald-100 text-emerald-800': ticket().status === TicketStatus.COMPLETED
+			}"
+		>
+			{{ getStatusLabel(ticket().status) }}
+	  </span>
+	</div>
+
+	<p class="text-sm mb-6 line-clamp-3">
+	  {{ ticket().description }}
+	</p>
+
+	@if (ticket().assignedTo) {
+		<div class="flex items-center mb-6">
+			@if (ticket().assignedTo!.avatar) {
+				<img 
+					[src]="ticket().assignedTo!.avatar" 
+					[alt]="ticket().assignedTo!.name"
+					class="assignee-avatar w-10 h-10 rounded-full mr-3"
+				/>
+			} @else {
+				<div class="assignee-avatar assignee-initials w-10 h-10 rounded-full mr-3 flex items-center justify-center">
+					<span class="text-sm font-medium">
+						{{ getInitials(ticket().assignedTo!.name) }}
+					</span>
+				</div>
+			}
+
+			<div>
+				<p class="text-sm font-semibold text-gray-900">
+					{{ ticket().assignedTo!.name }}
+				</p>
+				<p class="text-xs text-gray-500 capitalize">
+					{{ ticket().assignedTo!.role }}
+				</p>
+			</div>
+		</div>
+	} @else {
+		<div class="flex items-center mb-6">
+			<div class="assignee-avatar w-10 h-10 rounded-full mr-3 bg-gray-100 flex items-center justify-center">
+				<i class="pi pi-user text-gray-400"></i>
+			</div>
+
+			<div>
+				<p class="text-sm font-medium text-gray-500">Unassigned</p>
+				<p class="text-xs text-gray-400">Awaiting assignment</p>
+			</div>
+		</div>
+	}
+  </div>
+<div class="metadata-section !px-9 !-mt-2 !pb-10">
+	<div class="flex justify-between items-center text-xs">
+		<div class="flex items-center">
+			<div class="icon-wrapper mr-2 flex items-center justify-center w-6 h-6">
+				<i class="pi pi-clock"></i>
+			</div>
+			<span class="text-gray-600 font-medium">{{ ticket().createdAt | date:'mediumDate' }}</span>
+		</div>
+		
+		@if (ticket().completedAt) {
+			<div class="flex items-center text-emerald-600">
+				<div class="icon-wrapper mr-2 flex items-center justify-center w-6 h-6 bg-emerald-50">
+					<i class="pi pi-check  text-emerald-600"></i>
+				</div>
+				<span class="font-medium">{{ ticket().completedAt | date:'mediumDate' }}</span>
+			</div>
+		} @else {
+			<div class="flex items-center text-gray-500">
+				<div class="icon-wrapper mr-2 flex items-center justify-center w-6 h-6">
+					<i class="pi pi-refresh"></i>
+				</div>
+				<span class="font-medium">{{ ticket().updatedAt | date:'mediumDate' }}</span>
+			</div>
+		}
+	</div>
+</div>
+</div>

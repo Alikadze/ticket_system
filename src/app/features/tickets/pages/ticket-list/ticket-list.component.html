@@ -1,0 +1,76 @@
+<div class="ticket-list-container">
+	<div class="filters-section">
+		<div class="filters-header">
+			<h2 class="filters-title">
+				<i class="pi pi-filter mr-2"></i>
+				Filters
+			</h2>
+			<button 
+				class="clear-filters-btn ml-3"
+				(click)="clearFilters()"
+				[class.visible]="selectedStatus || selectedAssignee"
+			>
+				<i class="pi pi-times mr-1"></i>
+				Clear All
+			</button>
+		</div>
+		
+		<div class="filters-grid">
+			<div class="filter-group">
+				<label class="filter-label">Status</label>
+				<select 
+					class="filter-select"
+					[(ngModel)]="selectedStatus"
+					(ngModelChange)="applyFilters()"
+				>
+					<option value="">All Statuses</option>
+					<option [value]="TicketStatus.OPEN">Open</option>
+					<option [value]="TicketStatus.IN_PROGRESS">In Progress</option>
+					<option [value]="TicketStatus.COMPLETED">Completed</option>
+				</select>
+			</div>
+			
+			<div class="filter-group">
+				<label class="filter-label">Assignee</label>
+				<select 
+					class="filter-select"
+					[(ngModel)]="selectedAssignee"
+					(ngModelChange)="applyFilters()"
+				>
+					<option value="">All Assignees</option>
+					<option value="unassigned">Unassigned</option>
+					@for (user of users; track user.id) {
+						<option [value]="user.id">{{ user.name }}</option>
+					}
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+		@for (ticket of tickets$ | async; track ticket.id) {
+			<app-ticket-card
+				[ticket]="ticket"
+			/>
+		} @empty {
+			@defer (on timer(500)) {		
+				<div class="empty-state">
+					<div class="empty-icon">
+						<i class="pi pi-search"></i>
+					</div>
+					<h3 class="empty-title">No tickets found</h3>
+					<p class="empty-description">Try adjusting your filters to see more results</p>
+				</div>
+			}
+		}
+		
+		@if (!(tickets$ | async) && !selectedStatus && !selectedAssignee) {
+			<p-skeleton height="300px" styleClass="ticket-skeleton"/>
+			<p-skeleton height="300px" styleClass="ticket-skeleton"/>
+			<p-skeleton height="300px" styleClass="ticket-skeleton"/>
+			<p-skeleton height="300px" styleClass="ticket-skeleton"/>
+			<p-skeleton height="300px" styleClass="ticket-skeleton"/>
+			<p-skeleton height="300px" styleClass="ticket-skeleton"/>
+		}
+	</div>
+</div>

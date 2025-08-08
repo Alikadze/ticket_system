@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "primeicons/primeicons.css";
+
+html, body {
+    height: 100%;
+    background-color: white;
+    color: black;
+}
+
+.p-toast-message-success .p-toast-detail {
+    color: rgba(68, 66, 66, 0.659) !important;
+}
+
+.p-skeleton {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body {
+    margin: 0;
+}
