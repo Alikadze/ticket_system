@@ -8,7 +8,6 @@ import { environment } from '../../../environments/environment';
 })
 export class ApiService {
 	apiUrl = environment.apiUrl;
-
 	http: HttpClient = inject(HttpClient);
 
 	get<T> (path: string, params?: any): Observable<T>{

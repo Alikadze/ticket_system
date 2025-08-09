@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../../core/services/api.service';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { FilterParams, Ticket, User } from '../types';
 
 @Injectable({
@@ -8,10 +8,23 @@ import { FilterParams, Ticket, User } from '../types';
 })
 export class TicketService extends ApiService {
 	getTickets(params?: FilterParams): Observable<Ticket[]> {
-		return this.get<Ticket[]>(
-			'tickets',
-			params
-		);
+		let url = 'tickets';
+		
+		if (params && Object.keys(params).length > 0) {
+			const searchParams = new URLSearchParams();
+			
+			if (params.status) {
+				searchParams.append('status', params.status);
+			}
+			
+			if (params.assignedTo) {
+				searchParams.append('assignedTo', params.assignedTo);
+			}
+			
+			url += '?' + searchParams.toString();
+		}
+		
+		return this.get<Ticket[]>(url);
 	}
 
 	getTicketById(id: string): Observable<Ticket> {
@@ -39,5 +52,4 @@ export class TicketService extends ApiService {
 			{}
 		);
 	}
-
 }

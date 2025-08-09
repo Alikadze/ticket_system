@@ -6,7 +6,6 @@
   min-height: 100vh;
 }
 
-// Header Section
 .ticket-header {
   background: #ffffff;
   padding: 32px;
@@ -96,7 +95,6 @@
   }
 }
 
-// Progress Bar
 .progress-container {
   margin-top: 32px;
 
@@ -171,7 +169,6 @@
   }
 }
 
-// Content Grid
 .ticket-content {
   .content-grid {
     display: grid;
@@ -184,7 +181,6 @@
   }
 }
 
-// Content Cards
 .content-card {
   background: #ffffff;
   border-radius: 16px;
@@ -232,7 +228,6 @@
   }
 }
 
-// Timeline
 .timeline {
   .timeline-item {
     display: flex;
@@ -289,7 +284,6 @@
   }
 }
 
-// Assignee Info
 .assignee-info {
   display: flex;
   align-items: center;
@@ -337,7 +331,6 @@
   }
 }
 
-// Unassigned State
 .unassigned-state {
   display: flex;
   align-items: center;
@@ -374,7 +367,6 @@
   }
 }
 
-// Detail Rows
 .detail-row {
   display: flex;
   justify-content: space-between;
@@ -404,7 +396,6 @@
   }
 }
 
-// Action Buttons
 .action-buttons {
   display: flex;
   flex-direction: column;
@@ -474,7 +465,6 @@
   }
 }
 
-// Loading State
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -495,7 +485,6 @@
   }
 }
 
-// Responsive Design
 @media (max-width: 768px) {
   .ticket-detail-container {
     padding: 16px;

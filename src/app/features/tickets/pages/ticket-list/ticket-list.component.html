@@ -18,31 +18,28 @@
 		<div class="filters-grid">
 			<div class="filter-group">
 				<label class="filter-label">Status</label>
-				<select 
-					class="filter-select"
+				<p-select 
+					class="filter-select text-black"
 					[(ngModel)]="selectedStatus"
 					(ngModelChange)="applyFilters()"
+					[options]="statusOptions"
+					optionLabel="label"
+					optionValue="value"
 				>
-					<option value="">All Statuses</option>
-					<option [value]="TicketStatus.OPEN">Open</option>
-					<option [value]="TicketStatus.IN_PROGRESS">In Progress</option>
-					<option [value]="TicketStatus.COMPLETED">Completed</option>
-				</select>
+				</p-select>
 			</div>
 			
 			<div class="filter-group">
 				<label class="filter-label">Assignee</label>
-				<select 
+				<p-select
 					class="filter-select"
 					[(ngModel)]="selectedAssignee"
 					(ngModelChange)="applyFilters()"
+					[options]="assigneeOptions"
+					optionLabel="label"
+					optionValue="value"
 				>
-					<option value="">All Assignees</option>
-					<option value="unassigned">Unassigned</option>
-					@for (user of users; track user.id) {
-						<option [value]="user.id">{{ user.name }}</option>
-					}
-				</select>
+				</p-select>
 			</div>
 		</div>
 	</div>

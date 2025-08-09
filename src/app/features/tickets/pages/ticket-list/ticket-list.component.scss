@@ -4,7 +4,6 @@
   min-height: 100vh;
 }
 
-// Filters Section
 .filters-section {
   background: white;
   border-radius: 16px;
@@ -108,7 +107,6 @@
   }
 }
 
-// Tickets Grid
 .tickets-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -119,7 +117,6 @@
   }
 }
 
-// Empty State
 .empty-state {
   grid-column: 1 / -1;
   display: flex;
@@ -161,7 +158,6 @@
   }
 }
 
-// Responsive Design
 @media (max-width: 768px) {
   .ticket-list-container {
     padding: 16px;

@@ -200,6 +200,7 @@ export class MockData implements InMemoryDbService {
         }));
     }
 
+
     private assignTicket(reqInfo: RequestInfo) {
         const { headers, req, utils } = reqInfo;
         const ticketId = this.extractTicketIdFromUrl(req.url);

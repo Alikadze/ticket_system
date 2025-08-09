@@ -146,17 +146,16 @@ export class TicketComponent implements OnInit, OnDestroy {
 		).subscribe();
 	}
 
-	ngOnDestroy(): void {
-		this.sub$.next();
-		this.sub$.complete();
-	}
-
-	@HostListener('document:click', ['$event'])
 	onDocumentClick(event: Event) {
 		const target = event.target as HTMLElement;
 		if (!target.closest('.relative')) {
 			this.showUserDropdown = false;
 		}
+	}
+	
+	ngOnDestroy(): void {
+		this.sub$.next();
+		this.sub$.complete();
 	}
 }
 
